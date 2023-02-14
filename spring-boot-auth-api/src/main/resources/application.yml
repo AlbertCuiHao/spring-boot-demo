@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: demo
+  profiles:
+    active: dev
+    group:
+      dev:
+        - "dev"
+        - "dev-pg"
+        - "dev-redis"
+albert:
+  swagger:
+    token_header: Authorization
+security:
+  token:
+    header: "Authorization"
+    username: "username"
+    password: "password"

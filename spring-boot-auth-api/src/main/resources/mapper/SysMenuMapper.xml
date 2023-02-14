@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.albert.auth.mapper.SysMenuMapper">
+    <resultMap id="SysMenuEntityMap" type="com.albert.auth.entity.SysMenuEntity">
+        <result property="id" column="id"/>
+        <result property="name" column="menu_name"/>
+        <result property="orderNo" column="order_no"/>
+        <result column="pid" property="pid"/>
+        <result column="version_no" property="version"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_by" property="updateBy"/>
+    </resultMap>
+
+    <select id="findSysMenu" resultMap="SysMenuEntityMap">
+        SELECT id,
+               menu_name,
+               order_no,
+               pid,
+               version_no,
+               create_time,
+               create_by,
+               update_time,
+               update_by
+        FROM develop.sys_menu sm
+    </select>
+    <select id="findSysMenuByPid" resultMap="SysMenuEntityMap">
+        SELECT id,
+               menu_name,
+               order_no,
+               pid,
+               version_no,
+               create_time,
+               create_by,
+               update_time,
+               update_by
+        FROM develop.sys_menu sm
+        WHERE sm.pid = #{pid}
+    </select>
+    <delete id="deleteSysMenuById">
+        DELETE
+        FROM develop.sys_menu sm
+        WHERE sm.id = #{id}
+    </delete>
+    <insert id="addSysMenu" parameterType="com.albert.auth.entity.SysMenuEntity">
+        INSERT INTO develop.sys_menu
+        (id,
+         menu_name,
+         order_no,
+         pid,
+         version_no,
+         create_time,
+         create_by,
+         update_time,
+         update_by)
+        VALUES (#{id},
+                #{name},
+                #{orderNo},
+                #{pid},
+                '1',
+                NOW(),
+                #{createBy},
+                NOW(),
+                #{updateBy})
+    </insert>
+</mapper>

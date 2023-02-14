@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.albert.auth.mapper.SysAuthorityMapper">
+    <resultMap id="SysAuthorityEntityMap" type="com.albert.auth.entity.SysAuthorityEntity">
+        <result property="id" column="id"/>
+        <result property="name" column="authority_name"/>
+        <result column="version_no" property="version"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_by" property="updateBy"/>
+    </resultMap>
+
+    <select id="findSysAuthority" resultMap="SysAuthorityEntityMap">
+        SELECT id,
+               authority_name,
+               version_no,
+               create_time,
+               create_by,
+               update_time,
+               update_by
+        FROM develop.sys_authority
+    </select>
+</mapper>
