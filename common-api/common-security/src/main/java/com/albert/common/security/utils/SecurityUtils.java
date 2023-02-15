@@ -1,11 +1,9 @@
 package com.albert.common.security.utils;
 
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,8 +26,7 @@ public class SecurityUtils {
 
     public static List<String> getAuthorities() {
         List<String> authoritiesList = new ArrayList<>();
-        Collection<? extends GrantedAuthority> authorities = getAuthentication().getAuthorities();
-        authorities.forEach(temp -> authoritiesList.add(temp.getAuthority()));
+        getAuthentication().getAuthorities().forEach(temp -> authoritiesList.add(temp.getAuthority()));
         return authoritiesList;
     }
 

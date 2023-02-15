@@ -4,7 +4,6 @@ import com.albert.common.security.entity.UserEntity;
 import com.albert.common.security.mapper.UserRepository;
 import com.albert.common.security.model.UserTokenModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -20,18 +19,11 @@ import java.util.*;
 public class UserServiceImpl implements UserDetailsService {
 
     private UserRepository userRepository;
-    private RedisTemplate<String, Object> redisTemplate;
 
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
-    @Autowired
-    public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
-        this.redisTemplate = redisTemplate;
-    }
-
 
     @Override
     public UserDetails loadUserByUsername(String userName) {
@@ -48,10 +40,7 @@ public class UserServiceImpl implements UserDetailsService {
                     roleList.add(role);
                     authorities.add(new SimpleGrantedAuthority(role));
                 });
-                UserTokenModel model = new UserTokenModel();
-                model.setUsername(userName);
-                model.setRoleList(roleList);
-                redisTemplate.opsForValue().set(userName, model);
+
                 return new User(userName, entity.getPassword(), authorities);
             }
 
