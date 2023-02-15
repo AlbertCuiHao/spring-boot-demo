@@ -64,9 +64,7 @@ public class MyOncePerRequestFilter extends OncePerRequestFilter {
         List<GrantedAuthority> authorities = new ArrayList<>();
         if (userTokenModel != null) {
             userName = userTokenModel.getUsername();
-            userTokenModel.getRoleList().forEach(temp -> {
-                authorities.add(new SimpleGrantedAuthority(temp));
-            });
+            userTokenModel.getRoleList().forEach(temp -> authorities.add(new SimpleGrantedAuthority(temp)));
         }
         return new UsernamePasswordAuthenticationToken(userName, null, authorities);
     }
