@@ -60,6 +60,10 @@ public class SecurityConfig {
                 .anyRequest().authenticated().and().authenticationManager(authenticationManager(authenticationConfiguration))
                 .addFilterBefore(new MyOncePerRequestFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
+//                .accessDeniedHandler(((request, response, accessDeniedException) -> {
+//                    response.setStatus(HttpStatus.FORBIDDEN.value());
+//                    response.getWriter().write("403");
+//                }))
                 .and().logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
         httpSecurity.csrf().disable().cors().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         return httpSecurity.build();
