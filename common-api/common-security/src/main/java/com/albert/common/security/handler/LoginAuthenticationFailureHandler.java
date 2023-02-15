@@ -17,8 +17,6 @@ import java.util.HashMap;
 
 @Component
 public class LoginAuthenticationFailureHandler implements AuthenticationFailureHandler {
-
-
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);

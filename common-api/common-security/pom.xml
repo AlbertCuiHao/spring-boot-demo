@@ -11,20 +11,16 @@
     <artifactId>common-security</artifactId>
 
     <dependencies>
+        <!--security-->
         <dependency>
-            <groupId>com.albert</groupId>
-            <artifactId>common-redis</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <!--web-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <optional>true</optional>
-        </dependency>
-        <!--security-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <!--mybatis-->
         <dependency>

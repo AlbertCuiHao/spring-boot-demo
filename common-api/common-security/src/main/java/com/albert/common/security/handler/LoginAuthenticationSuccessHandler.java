@@ -18,8 +18,6 @@ import java.util.HashMap;
 
 @Component
 public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
-
-
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
