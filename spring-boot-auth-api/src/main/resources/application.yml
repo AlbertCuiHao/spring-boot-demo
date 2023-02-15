@@ -10,9 +10,8 @@ spring:
         - "dev-redis"
 albert:
   swagger:
-    token_header: Authorization
-security:
-  token:
-    header: "Authorization"
-    username: "username"
-    password: "password"
+    token:
+      header: Authorization
+  security:
+    token:
+      header: Authorization

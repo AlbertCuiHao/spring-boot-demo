@@ -18,23 +18,23 @@
     <!-- 声明子模块 -->
     <modules>
         <module>common-redis</module>
-<!--        <module>common-security</module>-->
+        <module>common-security</module>
         <module>common-swagger</module>
         <module>common-web</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
-<!--            <dependency>-->
-<!--                <groupId>com.albert</groupId>-->
-<!--                <artifactId>common-redis</artifactId>-->
-<!--                <version>${revision}</version>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>com.albert</groupId>-->
-<!--                <artifactId>common-security</artifactId>-->
-<!--                <version>${revision}</version>-->
-<!--            </dependency>-->
+            <dependency>
+                <groupId>com.albert</groupId>
+                <artifactId>common-redis</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.albert</groupId>
+                <artifactId>common-security</artifactId>
+                <version>${revision}</version>
+            </dependency>
             <dependency>
                 <groupId>com.albert</groupId>
                 <artifactId>common-swagger</artifactId>

@@ -8,9 +8,11 @@ import jakarta.validation.ValidationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -28,8 +30,8 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * 参数绑定
-     * BindException
+     * 数据验证
+     * validation
      */
     @ExceptionHandler(value = ValidationException.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
@@ -46,6 +48,13 @@ public class GlobalExceptionHandler {
     public ApiModel<String> nullPointerExceptionHandler(NullPointerException e) {
         logger.error(e.getMessage(), e);
         return ApiModel.fail(e.getMessage(), ApiStatus.NULL_POINTER_EXCEPTION);
+    }
+
+    @ExceptionHandler(value = AccessDeniedException.class)
+    @ResponseStatus(code = HttpStatus.FORBIDDEN)
+    public ApiModel<String> nullPointerExceptionHandler(AccessDeniedException e) {
+        logger.error(e.getMessage(), e);
+        return ApiModel.fail(e.getMessage(), ApiStatus.FORBIDDEN);
     }
 
     /**

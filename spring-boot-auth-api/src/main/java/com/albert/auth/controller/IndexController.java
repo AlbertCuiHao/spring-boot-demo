@@ -5,11 +5,10 @@ import com.albert.auth.entity.SysMenuEntity;
 import com.albert.auth.param.SysMenuParam;
 import com.albert.common.web.result.ApiModel;
 import com.albert.common.web.result.ApiStatus;
-
 import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +28,7 @@ public class IndexController {
     private final Logger logger = LoggerFactory.getLogger(IndexController.class);
 
     @Operation(summary = "ROLE_test")
-//    @PreAuthorize("hasRole('ROLE_test')")
+    @PreAuthorize("hasRole('ROLE_test')")
     @GetMapping("/date")
     public ApiModel<LocalDateTime> dateTest() {
         LocalDateTime now = LocalDateTime.now();
@@ -46,7 +45,7 @@ public class IndexController {
     }
 
     @Operation(summary = "demo:read")
-//    @PreAuthorize("hasAuthority('demo:read')")
+    @PreAuthorize("hasAuthority('demo:read')")
     @GetMapping("/param")
     public ApiModel<ArrayList<SysMenuEntity>> findAllByEntity(@Validated SysMenuParam param) {
         //List<SysMenuEntity> sysMenuTree = sysMenuService.findAllByEntity(param);

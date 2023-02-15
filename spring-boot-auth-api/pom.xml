@@ -25,11 +25,10 @@
             <groupId>com.albert</groupId>
             <artifactId>common-web</artifactId>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>com.albert</groupId>-->
-        <!--            <artifactId>common-security</artifactId>-->
-        <!--        </dependency>-->
-
+        <dependency>
+            <groupId>com.albert</groupId>
+            <artifactId>common-security</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>

@@ -21,7 +21,7 @@ import java.util.Map;
 @Configuration
 public class SwaggerConfig {
 
-    @Value("${albert.swagger.token_header}")
+    @Value("${albert.swagger.token.header}")
     private String tokenHeader;
 
     //swagger-ui/index.html
