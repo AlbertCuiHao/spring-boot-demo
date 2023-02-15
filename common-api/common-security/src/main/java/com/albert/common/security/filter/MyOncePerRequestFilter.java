@@ -1,13 +1,17 @@
 package com.albert.common.security.filter;
 
 
+import com.albert.common.security.model.UserTokenModel;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -17,8 +21,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
+@Component
 public class MyOncePerRequestFilter extends OncePerRequestFilter {
+    private RedisTemplate<String, Object> redisTemplate;
+
+    @Autowired
+    public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     /**
      * 在过滤之前和之后执行的事件
@@ -33,7 +43,9 @@ public class MyOncePerRequestFilter extends OncePerRequestFilter {
         if (Objects.isNull(tokenHeader)) {
             chain.doFilter(request, response);
         } else {
-            SecurityContextHolder.getContext().setAuthentication(getAuthentication(tokenHeader));
+            if (Boolean.TRUE.equals(redisTemplate.hasKey(tokenHeader))) {
+                SecurityContextHolder.getContext().setAuthentication(getAuthentication(tokenHeader));
+            }
             chain.doFilter(request, response);
         }
     }
@@ -46,11 +58,14 @@ public class MyOncePerRequestFilter extends OncePerRequestFilter {
      * @return 带用户名和密码以及权限的Authentication
      */
     private UsernamePasswordAuthenticationToken getAuthentication(String tokenHeader) {
-        String username = "";
+        UserTokenModel userTokenModel = (UserTokenModel) redisTemplate.opsForValue().get(tokenHeader);
+        String userName = "";
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_test"));
-        authorities.add(new SimpleGrantedAuthority("ROLE_demo:read"));
-        return new UsernamePasswordAuthenticationToken(username, null, authorities);
+        if (userTokenModel != null) {
+            userName = userTokenModel.getUsername();
+            authorities = userTokenModel.getGrantedAuthorityList();
+        }
+        return new UsernamePasswordAuthenticationToken(userName, null, authorities);
     }
 
 }

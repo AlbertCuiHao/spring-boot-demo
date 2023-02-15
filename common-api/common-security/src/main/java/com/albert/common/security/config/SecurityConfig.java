@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -52,6 +51,7 @@ public class SecurityConfig {
             HttpSecurity httpSecurity,
             AuthenticationSuccessHandler authenticationSuccessHandler,
             AuthenticationFailureHandler authenticationFailureHandler,
+            MyOncePerRequestFilter oncePerRequestFilter,
             AuthenticationEntryPoint authenticationEntryPoint,
             LogoutSuccessHandler logoutSuccessHandler,
             AccessDeniedHandler accessDeniedHandler) throws Exception {
@@ -61,7 +61,7 @@ public class SecurityConfig {
                 .failureHandler(authenticationFailureHandler)
                 .and().authorizeHttpRequests()
                 .anyRequest().authenticated().and().authenticationManager(authenticationManager(authenticationConfiguration))
-                .addFilterBefore(new MyOncePerRequestFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(oncePerRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
                 .accessDeniedHandler(accessDeniedHandler)
                 .and().logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
