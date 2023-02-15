@@ -52,9 +52,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = AccessDeniedException.class)
     @ResponseStatus(code = HttpStatus.FORBIDDEN)
-    public ApiModel<String> nullPointerExceptionHandler(AccessDeniedException e) {
-        logger.error(e.getMessage(), e);
-        return ApiModel.fail(e.getMessage(), ApiStatus.FORBIDDEN);
+    public ApiModel<String> accessDeniedExceptionHandler(AccessDeniedException e) throws AccessDeniedException {
+        throw e;
     }
 
     /**
