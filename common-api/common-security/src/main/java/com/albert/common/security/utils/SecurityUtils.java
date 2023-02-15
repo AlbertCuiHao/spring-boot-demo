@@ -9,9 +9,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * @author Albert
- */
 public class SecurityUtils {
     private SecurityUtils() {
     }
@@ -21,7 +18,6 @@ public class SecurityUtils {
     }
 
     public static String getUserName() {
-        //getAuthentication().getPrincipal().toString()
         Authentication authentication = getAuthentication();
         if (Objects.nonNull(authentication)) {
             return authentication.getName();
@@ -37,10 +33,4 @@ public class SecurityUtils {
         return authoritiesList;
     }
 
-    public static List<String> getAuthorities(Authentication authResult) {
-        List<String> authoritiesList = new ArrayList<>();
-        Collection<? extends GrantedAuthority> authorities = authResult.getAuthorities();
-        authorities.forEach(temp -> authoritiesList.add(temp.getAuthority()));
-        return authoritiesList;
-    }
 }

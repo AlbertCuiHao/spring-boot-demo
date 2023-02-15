@@ -13,11 +13,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
             <groupId>com.albert</groupId>
             <artifactId>common-swagger</artifactId>
         </dependency>

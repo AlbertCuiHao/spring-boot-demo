@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -60,10 +61,12 @@ public class MyOncePerRequestFilter extends OncePerRequestFilter {
     private UsernamePasswordAuthenticationToken getAuthentication(String tokenHeader) {
         UserTokenModel userTokenModel = (UserTokenModel) redisTemplate.opsForValue().get(tokenHeader);
         String userName = "";
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        List<GrantedAuthority> authorities = new ArrayList<>();
         if (userTokenModel != null) {
             userName = userTokenModel.getUsername();
-            authorities = userTokenModel.getGrantedAuthorityList();
+            userTokenModel.getRoleList().forEach(temp -> {
+                authorities.add(new SimpleGrantedAuthority(temp));
+            });
         }
         return new UsernamePasswordAuthenticationToken(userName, null, authorities);
     }

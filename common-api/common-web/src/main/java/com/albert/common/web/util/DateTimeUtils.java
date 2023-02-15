@@ -8,6 +8,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class DateTimeUtils {
+    private DateTimeUtils() {
+    }
 
     private static final String DEFAULT_DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
     private static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";

@@ -4,6 +4,7 @@ import com.albert.auth.entity.SysMenuEntity;
 import com.albert.auth.mapper.SysMenuMapper;
 import com.albert.auth.model.SysMenuModel;
 import com.albert.auth.service.SysMenuService;
+import com.albert.common.security.utils.SecurityUtils;
 import com.albert.common.web.result.ApiModel;
 import com.albert.common.web.result.ApiStatus;
 import com.albert.common.web.util.BaseUtils;
@@ -106,10 +107,8 @@ public class SysMenuServiceImpl implements SysMenuService {
     public ApiModel<String> addSysMenu(SysMenuEntity entity) {
         String uuid = BaseUtils.getUUID();
         entity.setId(uuid);
-//        entity.setCreateBy(SecurityUtils.getUserName());
-//        entity.setUpdateBy(SecurityUtils.getUserName());
-        entity.setCreateBy("System");
-        entity.setUpdateBy("System");
+        entity.setCreateBy(SecurityUtils.getUserName());
+        entity.setUpdateBy(SecurityUtils.getUserName());
         int i = sysMenuMapper.addSysMenu(entity);
         if (i > 0) {
             return ApiModel.success(uuid, ApiStatus.SAVE_SUCCESS);

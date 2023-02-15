@@ -1,19 +1,13 @@
 package com.albert.common.security.model;
 
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
-import java.io.Serial;
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-public class UserTokenModel implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class UserTokenModel {
     private String username;
 
-    private List<SimpleGrantedAuthority> grantedAuthorityList;
+    private List<String> roleList;
 
     public String getUsername() {
         return username;
@@ -23,12 +17,12 @@ public class UserTokenModel implements Serializable {
         this.username = username;
     }
 
-    public List<SimpleGrantedAuthority> getGrantedAuthorityList() {
-        return grantedAuthorityList;
+    public List<String> getRoleList() {
+        return roleList;
     }
 
-    public void setGrantedAuthorityList(List<SimpleGrantedAuthority> grantedAuthorityList) {
-        this.grantedAuthorityList = grantedAuthorityList;
+    public void setRoleList(List<String> roleList) {
+        this.roleList = roleList;
     }
 
     @Override
@@ -36,19 +30,19 @@ public class UserTokenModel implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserTokenModel that = (UserTokenModel) o;
-        return Objects.equals(username, that.username) && Objects.equals(grantedAuthorityList, that.grantedAuthorityList);
+        return Objects.equals(username, that.username) && Objects.equals(roleList, that.roleList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, grantedAuthorityList);
+        return Objects.hash(username, roleList);
     }
 
     @Override
     public String toString() {
         return new StringJoiner(", ", UserTokenModel.class.getSimpleName() + "[", "]")
                 .add("username='" + username + "'")
-                .add("grantedAuthorityList=" + grantedAuthorityList)
+                .add("roleList=" + roleList)
                 .toString();
     }
 }

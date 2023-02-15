@@ -3,6 +3,7 @@ package com.albert.auth.controller;
 
 import com.albert.auth.entity.SysMenuEntity;
 import com.albert.auth.param.SysMenuParam;
+import com.albert.common.security.utils.SecurityUtils;
 import com.albert.common.web.result.ApiModel;
 import com.albert.common.web.result.ApiStatus;
 import io.swagger.v3.oas.annotations.Operation;
@@ -48,7 +49,6 @@ public class IndexController {
     @PreAuthorize("hasAuthority('demo:read')")
     @GetMapping("/param")
     public ApiModel<ArrayList<SysMenuEntity>> findAllByEntity(@Validated SysMenuParam param) {
-        //List<SysMenuEntity> sysMenuTree = sysMenuService.findAllByEntity(param);
         return ApiModel.ok(Collections.emptyList(), ApiStatus.SUCCESS);
     }
 
@@ -77,6 +77,15 @@ public class IndexController {
         list.add(map2);
         list.add(map3);
         return ApiModel.ok(list, ApiStatus.SUCCESS);
+    }
+
+    @Operation(summary = "securityUtils")
+    @GetMapping("/security-utils")
+    public ApiModel<String> securityUtils() {
+        String userName = SecurityUtils.getUserName();
+        List<String> authorities = SecurityUtils.getAuthorities();
+        System.out.println(authorities);
+        return ApiModel.success(userName, ApiStatus.SUCCESS);
     }
 
 }
