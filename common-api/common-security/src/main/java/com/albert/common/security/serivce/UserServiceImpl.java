@@ -31,10 +31,10 @@ public class UserServiceImpl implements UserDetailsService {
             if (Objects.isNull(entity)) {
                 return new User(userName, "", Collections.emptyList());
             } else {
-                List<HashMap<String, String>> userRoleAndAuthorityList = userRepository.findUserRoleAndAuthorityByUsername(userName);
+                List<Map<String, Object>> userRoleAndAuthorityList = userRepository.findUserRoleAndAuthorityByUsername(userName);
                 List<GrantedAuthority> authorities = new ArrayList<>();
                 userRoleAndAuthorityList.forEach(temp -> {
-                    String role = temp.getOrDefault("security_name", "");
+                    String role = String.valueOf(temp.getOrDefault("security_name", ""));
                     authorities.add(new SimpleGrantedAuthority(role));
                 });
                 return new User(userName, entity.getPassword(), authorities);

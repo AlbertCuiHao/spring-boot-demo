@@ -2,7 +2,6 @@ package com.albert.common.security.config;
 
 
 import com.albert.common.security.filter.MyOncePerRequestFilter;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,7 +24,6 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-@MapperScan({"com.albert.common.security.mapper"})
 @ComponentScan({"com.albert.common.security.filter", "com.albert.common.security.handler"})
 public class SecurityConfig {
 

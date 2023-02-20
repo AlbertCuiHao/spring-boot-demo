@@ -6,7 +6,6 @@ logging:
   level:
     root: info
     com.albert.auth.mapper: debug
-    com.albert.common.security: debug
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   configuration:
