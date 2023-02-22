@@ -19,12 +19,12 @@ import java.util.HashMap;
 public class LoginAuthenticationFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-        response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
         HashMap<String, Object> map = new HashMap<>();
         map.put("status", true);
         map.put("code", "400");
         map.put("msg", "onAuthenticationFailure,登陆失败,用户名或者密码错误");
+        response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.getWriter().println(new ObjectMapper().writeValueAsString(map));
     }

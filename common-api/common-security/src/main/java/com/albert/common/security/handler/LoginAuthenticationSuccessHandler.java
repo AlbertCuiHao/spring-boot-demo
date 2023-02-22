@@ -42,13 +42,13 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
         model.setRoleList(authoritiesList);
         redisTemplate.opsForValue().set(name, model);
 
-        response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-        PrintWriter writer = response.getWriter();
         HashMap<String, Object> map = new HashMap<>();
         map.put("status", true);
         map.put("code", "200");
         map.put("msg", "onAuthenticationSuccess,登陆成功");
+        response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+        PrintWriter writer = response.getWriter();
         writer.println(new ObjectMapper().writeValueAsString(map));
         writer.close();
         response.setStatus(HttpStatus.OK.value());
