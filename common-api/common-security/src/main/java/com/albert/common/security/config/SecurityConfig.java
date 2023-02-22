@@ -33,7 +33,7 @@ import java.util.List;
 @EnableMethodSecurity
 @ComponentScan({"com.albert.common.security.filter", "com.albert.common.security.handler"})
 public class SecurityConfig {
-    @Value("${albert.front_end.url}")
+    @Value("${albert.front-end.url}")
     private String frontEndUrl;
     AuthenticationConfiguration authenticationConfiguration;
 
