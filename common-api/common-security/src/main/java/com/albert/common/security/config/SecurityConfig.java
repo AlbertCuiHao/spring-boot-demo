@@ -63,7 +63,7 @@ public class SecurityConfig {
                 .loginProcessingUrl("/login")
                 .successHandler(authenticationSuccessHandler)
                 .failureHandler(authenticationFailureHandler)
-                .and().authorizeHttpRequests().requestMatchers("/swagger-resources/**", "/swagger-ui/**", "/v3/**", "/error").permitAll()
+                .and().authorizeHttpRequests().requestMatchers("/swagger-ui/**", "/v3/**", "/error").permitAll()
                 .anyRequest().authenticated().and().authenticationManager(authenticationManager(authenticationConfiguration))
                 .addFilterBefore(oncePerRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
