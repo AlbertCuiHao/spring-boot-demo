@@ -3,6 +3,7 @@ package com.albert.common.security.config;
 
 import com.albert.common.security.filter.MyOncePerRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +33,8 @@ import java.util.List;
 @EnableMethodSecurity
 @ComponentScan({"com.albert.common.security.filter", "com.albert.common.security.handler"})
 public class SecurityConfig {
-
+    @Value("${albert.front_end.url}")
+    private String frontEndUrl;
     AuthenticationConfiguration authenticationConfiguration;
 
     @Autowired
@@ -76,7 +78,7 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000"));
+        configuration.setAllowedOrigins(List.of(frontEndUrl));
         configuration.setAllowedMethods(Collections.singletonList("*"));
         configuration.setAllowedHeaders(Collections.singletonList("*"));
         configuration.setAllowCredentials(true);

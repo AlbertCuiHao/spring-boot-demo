@@ -18,3 +18,5 @@ albert:
   security:
     token:
       header: Authorization
+  front_end:
+    url: http://localhost:3000
