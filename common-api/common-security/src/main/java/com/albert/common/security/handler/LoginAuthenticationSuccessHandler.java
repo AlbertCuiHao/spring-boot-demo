@@ -2,7 +2,6 @@ package com.albert.common.security.handler;
 
 import com.albert.common.security.model.UserTokenModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
     }
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
 
         String name = authentication.getName();
         List<String> authoritiesList = new ArrayList<>();
@@ -48,9 +47,9 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
         map.put("msg", "onAuthenticationSuccess,登陆成功");
         response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-        PrintWriter writer = response.getWriter();
-        writer.println(new ObjectMapper().writeValueAsString(map));
-        writer.close();
+        try (PrintWriter writer = response.getWriter()) {
+            writer.println(new ObjectMapper().writeValueAsString(map));
+        }
         response.setStatus(HttpStatus.OK.value());
         response.flushBuffer();
     }

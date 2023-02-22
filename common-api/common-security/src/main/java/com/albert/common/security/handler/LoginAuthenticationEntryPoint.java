@@ -9,6 +9,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 @Component
@@ -20,6 +21,8 @@ public class LoginAuthenticationEntryPoint implements AuthenticationEntryPoint {
         map.put("code", "401");
         map.put("msg", "onAuthenticationFailure,pls login");
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        response.getWriter().println(new ObjectMapper().writeValueAsString(map));
+        try (PrintWriter writer = response.getWriter()) {
+            writer.println(new ObjectMapper().writeValueAsString(map));
+        }
     }
 }
