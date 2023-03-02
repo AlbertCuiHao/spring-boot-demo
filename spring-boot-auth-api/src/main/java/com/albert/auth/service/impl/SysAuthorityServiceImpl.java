@@ -4,10 +4,10 @@ import com.albert.auth.entity.SysAuthorityEntity;
 import com.albert.auth.mapper.SysAuthorityMapper;
 import com.albert.auth.model.SysAuthorityModel;
 import com.albert.auth.service.SysAuthorityService;
+import com.albert.common.web.util.DateTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,9 +32,8 @@ public class SysAuthorityServiceImpl implements SysAuthorityService {
                 model.setVersion(entity.getVersion());
                 model.setCreateBy(entity.getCreateBy());
                 model.setUpdateBy(entity.getUpdateBy());
-                DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                model.setCreateTime(pattern.format(entity.getCreateTime()));
-                model.setUpdateTime(pattern.format(entity.getUpdateTime()));
+                model.setCreateTime(DateTimeUtils.getString(entity.getCreateTime()));
+                model.setUpdateTime(DateTimeUtils.getString(entity.getUpdateTime()));
                 endList.add(model);
             }
         }

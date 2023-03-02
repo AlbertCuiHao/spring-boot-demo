@@ -1,16 +1,11 @@
 package com.albert.common.web.entity;
 
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-public class BaseEntity implements Serializable {
-
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class BaseEntity {
 
     // version
     private Long version;

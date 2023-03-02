@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Tag(name = "Authority管理")
-@PreAuthorize("hasRole('ROLE_manager')")
-@RestController
+@PreAuthorize("hasRole('ROLE_AUTHORITY')")
 @RequestMapping(value = "/authority")
+@RestController
 @Validated
 public class SysAuthorityController {
 
@@ -33,9 +33,9 @@ public class SysAuthorityController {
 
 
     @Operation(summary = "查看")
-    @GetMapping("/findAll")
-    public ApiModel<ArrayList<SysAuthorityModel>> findSysMenu() {
-        List<SysAuthorityModel> sysAuthority = sysAuthorityService.findSysAuthority();
-        return ApiModel.ok(sysAuthority, ApiStatus.QUERY_SUCCESS);
+    @GetMapping("/find")
+    public ApiModel<ArrayList<SysAuthorityModel>> findSysAuthority() {
+        List<SysAuthorityModel> sysAuthorityModelList = sysAuthorityService.findSysAuthority();
+        return ApiModel.ok(sysAuthorityModelList, ApiStatus.QUERY_SUCCESS);
     }
 }

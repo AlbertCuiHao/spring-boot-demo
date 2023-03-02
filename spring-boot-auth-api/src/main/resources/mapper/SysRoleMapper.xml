@@ -3,10 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.albert.auth.mapper.SysAuthorityMapper">
-    <resultMap id="SysAuthorityEntityMap" type="com.albert.auth.entity.SysAuthorityEntity">
+<mapper namespace="com.albert.auth.mapper.SysRoleMapper">
+    <resultMap id="SysRoleEntityMap" type="com.albert.auth.entity.SysRoleEntity">
         <result property="id" column="id"/>
-        <result property="name" column="authority_name"/>
+        <result property="roleName" column="role_name"/>
         <result property="version" column="version_no"/>
         <result property="createTime" column="create_time"/>
         <result property="createBy" column="create_by"/>
@@ -14,14 +14,14 @@
         <result property="updateBy" column="update_by"/>
     </resultMap>
 
-    <select id="findSysAuthority" resultMap="SysAuthorityEntityMap">
+    <select id="findSysRole" resultMap="SysRoleEntityMap">
         SELECT id,
-               authority_name,
+               role_name,
                version_no,
                create_time,
                create_by,
                update_time,
                update_by
-        FROM develop.sys_authority
+        FROM develop.sys_role
     </select>
 </mapper>

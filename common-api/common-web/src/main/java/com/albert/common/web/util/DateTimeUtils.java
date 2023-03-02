@@ -35,5 +35,9 @@ public class DateTimeUtils {
         return date.format(dateTimeFormatter);
     }
 
+    public static LocalDateTime getLocalDateTime(String date) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DEFAULT_DATETIME_FORMAT);
+        return LocalDateTime.parse(date, dateTimeFormatter);
+    }
 
 }

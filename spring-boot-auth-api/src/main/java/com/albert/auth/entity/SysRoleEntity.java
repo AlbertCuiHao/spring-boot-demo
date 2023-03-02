@@ -6,11 +6,11 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 
-public class SysAuthorityEntity extends BaseEntity {
+public class SysRoleEntity extends BaseEntity {
 
     private String id;
 
-    private String name;
+    private String roleName;
 
     public String getId() {
         return id;
@@ -20,12 +20,12 @@ public class SysAuthorityEntity extends BaseEntity {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     @Override
@@ -33,20 +33,21 @@ public class SysAuthorityEntity extends BaseEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        SysAuthorityEntity that = (SysAuthorityEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name);
+        SysRoleEntity that = (SysRoleEntity) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(roleName, that.roleName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, name);
+        return Objects.hash(super.hashCode(), id, roleName);
     }
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", SysAuthorityEntity.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", SysRoleEntity.class.getSimpleName() + "[", "]")
                 .add("id='" + id + "'")
-                .add("name='" + name + "'")
+                .add("roleName='" + roleName + "'")
                 .toString();
     }
 }

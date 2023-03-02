@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ApiModel<T extends Serializable> {
+public class ApiModel<T> {
 
     private boolean status;
 
