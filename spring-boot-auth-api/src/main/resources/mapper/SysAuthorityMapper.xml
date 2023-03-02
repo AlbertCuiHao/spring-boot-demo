@@ -25,7 +25,7 @@
         FROM develop.sys_authority
     </select>
 
-    <insert id="addSysAuthority" parameterType="com.albert.auth.model.SysAuthorityModel">
+    <insert id="addSysAuthority" parameterType="com.albert.auth.entity.SysAuthorityEntity">
         INSERT INTO develop.sys_authority
         (id,
          authority_name,
@@ -37,9 +37,9 @@
         VALUES (#{id},
                 #{authorityName},
                 '1',
-                NOW(),
+                #{createTime},
                 #{createBy},
-                NOW(),
+                #{updateTime},
                 #{updateBy})
     </insert>
 </mapper>

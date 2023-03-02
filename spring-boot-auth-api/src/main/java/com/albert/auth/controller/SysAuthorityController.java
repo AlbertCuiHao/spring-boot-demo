@@ -1,6 +1,7 @@
 package com.albert.auth.controller;
 
 
+import com.albert.auth.entity.SysAuthorityEntity;
 import com.albert.auth.model.SysAuthorityModel;
 import com.albert.auth.service.SysAuthorityService;
 import com.albert.common.web.result.ApiModel;
@@ -39,9 +40,9 @@ public class SysAuthorityController {
     }
 
     @Operation(summary = "新增")
-    @PostMapping("/save")
-    public ApiModel<String> addSysAuthority(@RequestBody @Validated SysAuthorityModel model) {
-        String id = sysAuthorityService.addSysAuthority(model);
+    @PostMapping("/add")
+    public ApiModel<String> addSysAuthority(@RequestBody @Validated SysAuthorityEntity entity) {
+        String id = sysAuthorityService.addSysAuthority(entity);
         return ApiModel.success(id, ApiStatus.SAVE_SUCCESS);
     }
 

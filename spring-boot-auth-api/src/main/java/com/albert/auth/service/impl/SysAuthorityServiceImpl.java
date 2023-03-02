@@ -10,6 +10,7 @@ import com.albert.common.web.util.DateTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,12 +44,14 @@ public class SysAuthorityServiceImpl implements SysAuthorityService {
     }
 
     @Override
-    public String addSysAuthority(SysAuthorityModel model) {
+    public String addSysAuthority(SysAuthorityEntity entity) {
         String uuid = BaseUtils.getUUID();
-        model.setId(uuid);
-        model.setCreateBy(SecurityUtils.getUserName());
-        model.setUpdateBy(SecurityUtils.getUserName());
-        int i = authorityMapper.addSysAuthority(model);
+        entity.setId(uuid);
+        entity.setCreateTime(LocalDateTime.now());
+        entity.setCreateBy(SecurityUtils.getUserName());
+        entity.setUpdateTime(LocalDateTime.now());
+        entity.setUpdateBy(SecurityUtils.getUserName());
+        int i = authorityMapper.addSysAuthority(entity);
         if (i > 0) {
             return uuid;
         }
