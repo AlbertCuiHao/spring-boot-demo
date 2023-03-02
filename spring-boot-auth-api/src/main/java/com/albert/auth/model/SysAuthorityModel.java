@@ -1,10 +1,12 @@
 package com.albert.auth.model;
 
+import java.util.StringJoiner;
+
 public class SysAuthorityModel {
 
     private String id;
 
-    private String name;
+    private String authorityName;
 
     private Long version;
 
@@ -24,12 +26,12 @@ public class SysAuthorityModel {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getAuthorityName() {
+        return authorityName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAuthorityName(String authorityName) {
+        this.authorityName = authorityName;
     }
 
     public Long getVersion() {
@@ -70,5 +72,18 @@ public class SysAuthorityModel {
 
     public void setUpdateBy(String updateBy) {
         this.updateBy = updateBy;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", SysAuthorityModel.class.getSimpleName() + "[", "]")
+                .add("id='" + id + "'")
+                .add("authorityName='" + authorityName + "'")
+                .add("version=" + version)
+                .add("createTime='" + createTime + "'")
+                .add("createBy='" + createBy + "'")
+                .add("updateTime='" + updateTime + "'")
+                .add("updateBy='" + updateBy + "'")
+                .toString();
     }
 }

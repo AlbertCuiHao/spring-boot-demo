@@ -4,6 +4,8 @@ import com.albert.auth.entity.SysAuthorityEntity;
 import com.albert.auth.mapper.SysAuthorityMapper;
 import com.albert.auth.model.SysAuthorityModel;
 import com.albert.auth.service.SysAuthorityService;
+import com.albert.common.security.utils.SecurityUtils;
+import com.albert.common.web.util.BaseUtils;
 import com.albert.common.web.util.DateTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +30,7 @@ public class SysAuthorityServiceImpl implements SysAuthorityService {
             for (SysAuthorityEntity entity : sysAuthority) {
                 SysAuthorityModel model = new SysAuthorityModel();
                 model.setId(entity.getId());
-                model.setName(entity.getName());
+                model.setAuthorityName(entity.getAuthorityName());
                 model.setVersion(entity.getVersion());
                 model.setCreateBy(entity.getCreateBy());
                 model.setUpdateBy(entity.getUpdateBy());
@@ -39,4 +41,24 @@ public class SysAuthorityServiceImpl implements SysAuthorityService {
         }
         return endList;
     }
+
+    @Override
+    public String addSysAuthority(SysAuthorityModel model) {
+        String uuid = BaseUtils.getUUID();
+        model.setId(uuid);
+        model.setCreateBy(SecurityUtils.getUserName());
+        model.setUpdateBy(SecurityUtils.getUserName());
+        int i = authorityMapper.addSysAuthority(model);
+        if (i > 0) {
+            return uuid;
+        }
+        return "";
+    }
+
+    @Override
+    public String deleteSysAuthorityById(String id) {
+        return null;
+    }
+
+
 }

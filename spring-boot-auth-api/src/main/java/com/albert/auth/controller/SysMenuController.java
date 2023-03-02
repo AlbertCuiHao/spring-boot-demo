@@ -32,8 +32,8 @@ public class SysMenuController {
         this.sysMenuService = sysMenuService;
     }
 
-    @Operation(summary = "查看")
-    @GetMapping("/show")
+    @Operation(summary = "查询")
+    @GetMapping("/find")
     public ApiModel<ArrayList<SysMenuModel>> findSysMenu() {
         List<SysMenuModel> sysMenuTree = sysMenuService.findSysMenu();
         return ApiModel.ok(sysMenuTree, ApiStatus.QUERY_SUCCESS);

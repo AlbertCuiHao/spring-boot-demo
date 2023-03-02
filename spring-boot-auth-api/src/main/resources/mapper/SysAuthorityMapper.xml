@@ -6,7 +6,7 @@
 <mapper namespace="com.albert.auth.mapper.SysAuthorityMapper">
     <resultMap id="SysAuthorityEntityMap" type="com.albert.auth.entity.SysAuthorityEntity">
         <result property="id" column="id"/>
-        <result property="name" column="authority_name"/>
+        <result property="authorityName" column="authority_name"/>
         <result property="version" column="version_no"/>
         <result property="createTime" column="create_time"/>
         <result property="createBy" column="create_by"/>
@@ -24,4 +24,22 @@
                update_by
         FROM develop.sys_authority
     </select>
+
+    <insert id="addSysAuthority" parameterType="com.albert.auth.model.SysAuthorityModel">
+        INSERT INTO develop.sys_authority
+        (id,
+         authority_name,
+         version_no,
+         create_time,
+         create_by,
+         update_time,
+         update_by)
+        VALUES (#{id},
+                #{authorityName},
+                '1',
+                NOW(),
+                #{createBy},
+                NOW(),
+                #{updateBy})
+    </insert>
 </mapper>

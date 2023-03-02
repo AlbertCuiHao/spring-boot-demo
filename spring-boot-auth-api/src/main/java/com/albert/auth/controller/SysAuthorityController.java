@@ -7,12 +7,11 @@ import com.albert.common.web.result.ApiModel;
 import com.albert.common.web.result.ApiStatus;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,4 +37,20 @@ public class SysAuthorityController {
         List<SysAuthorityModel> sysAuthorityModelList = sysAuthorityService.findSysAuthority();
         return ApiModel.ok(sysAuthorityModelList, ApiStatus.QUERY_SUCCESS);
     }
+
+    @Operation(summary = "新增")
+    @PostMapping("/save")
+    public ApiModel<String> addSysAuthority(@RequestBody @Validated SysAuthorityModel model) {
+        String id = sysAuthorityService.addSysAuthority(model);
+        return ApiModel.success(id, ApiStatus.SAVE_SUCCESS);
+    }
+
+    @Operation(summary = "删除")
+    @GetMapping("/delete")
+    public ApiModel<String> deleteSysAuthorityById(@RequestParam @NotBlank String id) {
+        String msg = sysAuthorityService.deleteSysAuthorityById(id);
+        return ApiModel.success(msg, ApiStatus.DELETE_SUCCESS);
+    }
+
+
 }

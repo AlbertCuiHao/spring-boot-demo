@@ -10,7 +10,7 @@ public class SysAuthorityEntity extends BaseEntity {
 
     private String id;
 
-    private String name;
+    private String authorityName;
 
     public String getId() {
         return id;
@@ -20,12 +20,12 @@ public class SysAuthorityEntity extends BaseEntity {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getAuthorityName() {
+        return authorityName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAuthorityName(String authorityName) {
+        this.authorityName = authorityName;
     }
 
     @Override
@@ -34,19 +34,19 @@ public class SysAuthorityEntity extends BaseEntity {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         SysAuthorityEntity that = (SysAuthorityEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name);
+        return Objects.equals(id, that.id) && Objects.equals(authorityName, that.authorityName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, name);
+        return Objects.hash(super.hashCode(), id, authorityName);
     }
 
     @Override
     public String toString() {
         return new StringJoiner(", ", SysAuthorityEntity.class.getSimpleName() + "[", "]")
                 .add("id='" + id + "'")
-                .add("name='" + name + "'")
+                .add("authorityName='" + authorityName + "'")
                 .toString();
     }
 }
