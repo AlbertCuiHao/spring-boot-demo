@@ -13,17 +13,17 @@ import java.util.List;
 
 @Service
 public class SysAuthorityServiceImpl implements SysAuthorityService {
-    private SysAuthorityMapper sysAuthorityMapper;
+    private SysAuthorityMapper authorityMapper;
 
     @Autowired
-    public void setSysAuthorityMapper(SysAuthorityMapper sysAuthorityMapper) {
-        this.sysAuthorityMapper = sysAuthorityMapper;
+    public void setAuthorityMapper(SysAuthorityMapper authorityMapper) {
+        this.authorityMapper = authorityMapper;
     }
 
     @Override
     public List<SysAuthorityModel> findSysAuthority() {
         List<SysAuthorityModel> endList = new ArrayList<>();
-        List<SysAuthorityEntity> sysAuthority = sysAuthorityMapper.findSysAuthority();
+        List<SysAuthorityEntity> sysAuthority = authorityMapper.findSysAuthority();
         if (!sysAuthority.isEmpty()) {
             for (SysAuthorityEntity entity : sysAuthority) {
                 SysAuthorityModel model = new SysAuthorityModel();

@@ -19,9 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Tag(name = "菜单管理")
-//@PreAuthorize("hasRole('ROLE_manager')")
-@RestController
 @RequestMapping(value = "/menu")
+@RestController
 @Validated
 public class SysMenuController {
 
