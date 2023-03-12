@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class SysAuthorityServiceImpl implements SysAuthorityService {
@@ -37,8 +38,13 @@ public class SysAuthorityServiceImpl implements SysAuthorityService {
 
     @Override
     public SysAuthorityModel findSysAuthorityById(String id) {
-        SysAuthorityEntity entity = authorityMapper.findSysAuthorityById();
-        return entityToModel(entity);
+        SysAuthorityEntity entity = authorityMapper.findSysAuthorityById(id);
+        if (Objects.isNull(entity)) {
+            return new SysAuthorityModel();
+        } else {
+            return entityToModel(entity);
+        }
+
     }
 
     @Override

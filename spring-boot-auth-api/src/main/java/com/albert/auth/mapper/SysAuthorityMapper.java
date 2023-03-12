@@ -2,6 +2,7 @@ package com.albert.auth.mapper;
 
 import com.albert.auth.entity.SysAuthorityEntity;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
 public interface SysAuthorityMapper {
     List<SysAuthorityEntity> findSysAuthority();
 
-    SysAuthorityEntity findSysAuthorityById();
+    SysAuthorityEntity findSysAuthorityById(@Param("id") String id);
 
     int addSysAuthority(SysAuthorityEntity entity);
 
