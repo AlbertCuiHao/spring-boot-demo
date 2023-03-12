@@ -39,10 +39,24 @@ public class SysAuthorityController {
         return ApiModel.ok(sysAuthorityModelList, ApiStatus.QUERY_SUCCESS);
     }
 
+    @Operation(summary = "查看")
+    @GetMapping("/find/id")
+    public ApiModel<SysAuthorityModel> findSysAuthorityById(@RequestParam @NotBlank String id) {
+        SysAuthorityModel model = sysAuthorityService.findSysAuthorityById(id);
+        return ApiModel.success(model, ApiStatus.QUERY_SUCCESS);
+    }
+
     @Operation(summary = "新增")
     @PostMapping("/add")
     public ApiModel<String> addSysAuthority(@RequestBody @Validated SysAuthorityEntity entity) {
         String id = sysAuthorityService.addSysAuthority(entity);
+        return ApiModel.success(id, ApiStatus.SAVE_SUCCESS);
+    }
+
+    @Operation(summary = "修改")
+    @PostMapping("/update")
+    public ApiModel<String> updateSysAuthority(@RequestBody @Validated SysAuthorityEntity entity) {
+        String id = sysAuthorityService.updateSysAuthority(entity);
         return ApiModel.success(id, ApiStatus.SAVE_SUCCESS);
     }
 

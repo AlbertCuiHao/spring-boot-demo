@@ -10,5 +10,13 @@ import java.util.List;
 public interface SysAuthorityMapper {
     List<SysAuthorityEntity> findSysAuthority();
 
+    SysAuthorityEntity findSysAuthorityById();
+
     int addSysAuthority(SysAuthorityEntity entity);
+
+    int updateSysAuthority(SysAuthorityEntity entity);
+
+    int deleteSysAuthorityById(String id);
+
+
 }

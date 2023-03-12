@@ -1,6 +1,5 @@
 package com.albert.common.web.result;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -47,7 +46,7 @@ public class ApiModel<T> {
         this.data = data;
     }
 
-    public static <T extends Serializable> ApiModel<T> success(T data) {
+    public static <T> ApiModel<T> success(T data) {
         ApiModel<T> result = new ApiModel<>();
         result.setStatus(true);
         result.setCode(ApiStatus.SUCCESS.getCode());
@@ -56,7 +55,7 @@ public class ApiModel<T> {
         return result;
     }
 
-    public static <T extends Serializable> ApiModel<T> success(T data, ApiMessage apiMessage) {
+    public static <T> ApiModel<T> success(T data, ApiMessage apiMessage) {
         ApiModel<T> result = new ApiModel<>();
         result.setStatus(true);
         result.setCode(apiMessage.getCode());
@@ -80,7 +79,7 @@ public class ApiModel<T> {
         return result;
     }
 
-    public static <T extends Serializable> ApiModel<T> fail(T data) {
+    public static <T> ApiModel<T> fail(T data) {
         ApiModel<T> result = new ApiModel<>();
         result.setStatus(false);
         result.setCode(ApiStatus.FAIL.getCode());
@@ -89,7 +88,7 @@ public class ApiModel<T> {
         return result;
     }
 
-    public static <T extends Serializable> ApiModel<T> fail(T data, ApiMessage apiMessage) {
+    public static <T> ApiModel<T> fail(T data, ApiMessage apiMessage) {
         ApiModel<T> result = new ApiModel<>();
         result.setStatus(false);
         result.setCode(apiMessage.getCode());

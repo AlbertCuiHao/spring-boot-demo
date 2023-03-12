@@ -14,6 +14,7 @@
         <result property="updateBy" column="update_by"/>
     </resultMap>
 
+
     <select id="findSysAuthority" resultMap="SysAuthorityEntityMap">
         SELECT id,
                authority_name,
@@ -23,6 +24,17 @@
                update_time,
                update_by
         FROM develop.sys_authority
+    </select>
+    <select id="findSysAuthorityById" resultMap="SysAuthorityEntityMap">
+        SELECT id,
+               authority_name,
+               version_no,
+               create_time,
+               create_by,
+               update_time,
+               update_by
+        FROM develop.sys_authority a
+        WHERE a.id = #{id}
     </select>
 
     <insert id="addSysAuthority" parameterType="com.albert.auth.entity.SysAuthorityEntity">
@@ -42,4 +54,18 @@
                 #{updateTime},
                 #{updateBy})
     </insert>
+    <update id="updateSysAuthority" parameterType="com.albert.auth.entity.SysAuthorityEntity">
+        UPDATE develop.sys_authority a
+        SET authority_name = #{authorityName},
+            version_no=version_no + 1,
+            update_time= #{updateTime},
+            create_by      = #{updateBy}
+        WHERE a.id = #{id}
+          AND a.version_no = #{version}
+    </update>
+    <delete id="deleteSysAuthorityById">
+        DELETE
+        FROM develop.sys_authority a
+        WHERE a.id = #{id}
+    </delete>
 </mapper>

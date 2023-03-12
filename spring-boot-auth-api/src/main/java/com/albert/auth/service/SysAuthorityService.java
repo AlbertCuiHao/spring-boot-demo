@@ -8,7 +8,11 @@ import java.util.List;
 public interface SysAuthorityService {
     List<SysAuthorityModel> findSysAuthority();
 
+    SysAuthorityModel findSysAuthorityById(String id);
+
     String addSysAuthority(SysAuthorityEntity entity);
+
+    String updateSysAuthority(SysAuthorityEntity entity);
 
     String deleteSysAuthorityById(String id);
 

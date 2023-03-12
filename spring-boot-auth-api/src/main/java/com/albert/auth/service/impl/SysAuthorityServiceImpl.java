@@ -25,22 +25,20 @@ public class SysAuthorityServiceImpl implements SysAuthorityService {
 
     @Override
     public List<SysAuthorityModel> findSysAuthority() {
-        List<SysAuthorityModel> endList = new ArrayList<>();
-        List<SysAuthorityEntity> sysAuthority = authorityMapper.findSysAuthority();
-        if (!sysAuthority.isEmpty()) {
-            for (SysAuthorityEntity entity : sysAuthority) {
-                SysAuthorityModel model = new SysAuthorityModel();
-                model.setId(entity.getId());
-                model.setAuthorityName(entity.getAuthorityName());
-                model.setVersion(entity.getVersion());
-                model.setCreateBy(entity.getCreateBy());
-                model.setUpdateBy(entity.getUpdateBy());
-                model.setCreateTime(DateTimeUtils.getString(entity.getCreateTime()));
-                model.setUpdateTime(DateTimeUtils.getString(entity.getUpdateTime()));
-                endList.add(model);
+        List<SysAuthorityModel> modelList = new ArrayList<>();
+        List<SysAuthorityEntity> entityList = authorityMapper.findSysAuthority();
+        if (!entityList.isEmpty()) {
+            for (SysAuthorityEntity entity : entityList) {
+                modelList.add(entityToModel(entity));
             }
         }
-        return endList;
+        return modelList;
+    }
+
+    @Override
+    public SysAuthorityModel findSysAuthorityById(String id) {
+        SysAuthorityEntity entity = authorityMapper.findSysAuthorityById();
+        return entityToModel(entity);
     }
 
     @Override
@@ -59,9 +57,35 @@ public class SysAuthorityServiceImpl implements SysAuthorityService {
     }
 
     @Override
-    public String deleteSysAuthorityById(String id) {
-        return null;
+    public String updateSysAuthority(SysAuthorityEntity entity) {
+        entity.setUpdateTime(LocalDateTime.now());
+        entity.setUpdateBy(SecurityUtils.getUserName());
+        int i = authorityMapper.updateSysAuthority(entity);
+        if (i > 0) {
+            return entity.getId();
+        }
+        return "";
     }
 
+    @Override
+    public String deleteSysAuthorityById(String id) {
+        int i = authorityMapper.deleteSysAuthorityById(id);
+        if (i > 0) {
+            return id;
+        }
+        return "";
+    }
+
+    public SysAuthorityModel entityToModel(SysAuthorityEntity entity) {
+        SysAuthorityModel model = new SysAuthorityModel();
+        model.setId(entity.getId());
+        model.setAuthorityName(entity.getAuthorityName());
+        model.setVersion(entity.getVersion());
+        model.setCreateBy(entity.getCreateBy());
+        model.setUpdateBy(entity.getUpdateBy());
+        model.setCreateTime(DateTimeUtils.getString(entity.getCreateTime()));
+        model.setUpdateTime(DateTimeUtils.getString(entity.getUpdateTime()));
+        return model;
+    }
 
 }
